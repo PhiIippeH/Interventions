@@ -25,10 +25,13 @@ describe('ProblemeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-    it('champ Prenom doit comporter au moins 5 caractères', () => {
+    it('champ Prenom doit comporter au moins 2 caractères', () => {
+      let errors = {};
       let zone = component.problemeForm.controls['Prenom'];
-      zone.setValue('a'.repeat(200));
-      expect(zone.valid).toBeTruthy();
+      zone.setValue('a'.repeat(2));
+      //errors = zone.errors || {};
+      //expect(errors['minlength']).toBeFalsy();
+      expect(zone.valid).toBeFalsy();
     });
 
 });
