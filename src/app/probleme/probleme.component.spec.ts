@@ -27,8 +27,8 @@ describe('ProblemeComponent', () => {
 
     it('champ Prenom doit comporter au moins 5 caractères', () => {
       let zone = component.problemeForm.controls['Prenom'];
-      zone.setValue('a'.repeat(2));
-      expect(zone.valid).toBeFalsy();
+      zone.setValue('a'.repeat(3));
+      expect(zone.valid).toBeTruthy();
     });
 
 });
