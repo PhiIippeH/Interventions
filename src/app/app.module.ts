@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ProblemeComponent } from './probleme/probleme.component';
-import { ProduitComponent } from './produit/produit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -16,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     AccueilComponent,
     ProblemeComponent,
-    ProduitComponent
+    
   ],
   imports: [
     BrowserModule,
