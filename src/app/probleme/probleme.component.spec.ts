@@ -57,6 +57,10 @@ describe('ProblemeComponent', () => {
       expect(zone.valid).toBeTruthy();
     });
     
-    
+    it('champ Prenom valide avec 10 espaces', () => {
+      let zone = component.problemeForm.controls['Prenom'];
+      zone.setValue('  a'.repeat(1));
+      expect(zone.valid).toBeTruthy();
+    });
     
 });
