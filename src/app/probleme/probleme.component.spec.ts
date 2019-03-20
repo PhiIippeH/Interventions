@@ -25,13 +25,12 @@ describe('ProblemeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-    it('champ Prenom invalide avec aucune valeur', () => {
-      let errors = {};
+    it('champ Prenom invalide avec 2 caractères', () => {
       let zone = component.problemeForm.controls['Prenom'];
-      zone.setValue('a'.repeat(0));
-      errors = zone.errors || {};
-      expect(errors['minlength']).toBeFalsy();
-      //expect(zone.valid).toBeTruthy();
+      zone.setValue('a'.repeat(2));
+      expect(zone.valid).toBeFalsy();
     });
 
+    
+    
 });
