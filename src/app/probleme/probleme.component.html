@@ -11,7 +11,7 @@
             (ngSubmit)="Save()"
             [formGroup]="problemeForm">
               <div class="form-group row">
-                <label for="prenomId" class="col-md-2 col-form-label">Prénom : </label>
+                <label for="prenomId" class="col-md-2 col-form-label">Prénom :</label>
                 <div class="col-md-10">
                   <input class="form-control"
                     id="prenomId"
@@ -26,16 +26,16 @@
                     (!problemeForm.get('prenom').valid )}"/> 
 
                     <span class="form-text" *ngIf="(problemeForm.get('prenom').touched || problemeForm.get('prenom').dirty) && problemeForm.get('prenom').errors">
+                    <span *ngIf="problemeForm.get('prenom').errors.required">
+                      <small class="text-muted">
+                        Merci de saisir votre prénom.
+                      </small>
+                    </span>
                         <span *ngIf="problemeForm.get('prenom').errors.nbreCaracteresInsuffisants">
                           <small class="text-muted">
                             Veuillez entrer plus de caractères.
                           </small>
                         </span>
-                        <span *ngIf="problemeForm.get('prenom').errors.required">
-                            <small class="text-muted">
-                              Merci de saisir votre prénom.
-                            </small>
-                          </span>
                       </span>
                 </div>
               </div>
