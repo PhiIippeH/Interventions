@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ZonesValidator } from '../shared/longueur-minimum/longueur-minimum.component';
 import { TypeProblemeService } from './type-probleme.service';
 import { ITypeProbleme } from './typeProbleme';
-import { typeProbleme } from './typeProbleme-data';
+import { emailMatcherValidator } from '../shared/email-matcher/email-matcher.component';
 
 @Component({
   selector: 'inter-probleme',
@@ -40,6 +40,7 @@ export class ProblemeComponent implements OnInit {
     const courriel = this.problemeForm.get('courrielGroup.courriel');
     const courrielConfirmation = this.problemeForm.get('courrielGroup.courrielConfirmation')
     const telephone = this.problemeForm.get('telephone');
+    const courrielGroup = this.problemeForm.get('courrielGroup');
 
     courriel.clearValidators();
     courriel.reset();
@@ -60,14 +61,16 @@ export class ProblemeComponent implements OnInit {
       }
 
       if(TypeProbleme === "ParCourriel"){
-        courriel.setValidators([Validators.required])
+        courriel.setValidators([Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
         courriel.enable();
-        courrielConfirmation.setValidators([Validators.required])
+        courrielConfirmation.setValidators([Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
         courrielConfirmation.enable();
+        courrielGroup.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])])
       }
       courriel.updateValueAndValidity();
       courrielConfirmation.updateValueAndValidity();
       telephone.updateValueAndValidity();
+
   }
 
   
