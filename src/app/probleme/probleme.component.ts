@@ -4,6 +4,7 @@ import { ZonesValidator } from '../shared/longueur-minimum/longueur-minimum.comp
 import { TypeProblemeService } from './type-probleme.service';
 import { ITypeProbleme } from './typeProbleme';
 import { emailMatcherValidator } from '../shared/email-matcher/email-matcher.component';
+import { typeProbleme } from './typeProbleme-data';
 
 @Component({
   selector: 'inter-probleme',
@@ -57,7 +58,7 @@ export class ProblemeComponent implements OnInit {
 
       if(TypeProbleme === "ParTelephone"){
         telephone.enable();
-        telephone.setValidators([Validators.required])
+        telephone.setValidators([Validators.required, Validators.pattern('[0-9]+'),Validators.minLength(10),Validators.maxLength(10)]);
       }
 
       if(TypeProbleme === "ParCourriel"){
@@ -66,7 +67,14 @@ export class ProblemeComponent implements OnInit {
         courrielConfirmation.setValidators([Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
         courrielConfirmation.enable();
         courrielGroup.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])])
+      }else{
+        if(typeProbleme){
+          
+        }
       }
+
+
+
       courriel.updateValueAndValidity();
       courrielConfirmation.updateValueAndValidity();
       telephone.updateValueAndValidity();
