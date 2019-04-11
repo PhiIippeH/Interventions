@@ -4,7 +4,6 @@ import { ZonesValidator } from '../shared/longueur-minimum/longueur-minimum.comp
 import { TypeProblemeService } from './type-probleme.service';
 import { ITypeProbleme } from './typeProbleme';
 import { emailMatcherValidator } from '../shared/email-matcher/email-matcher.component';
-import { typeProbleme } from './typeProbleme-data';
 
 @Component({
   selector: 'inter-probleme',
@@ -19,25 +18,33 @@ export class ProblemeComponent implements OnInit {
 
   ngOnInit() {
     this.problemeForm = this.fb.group({
-        prenom: ['',[ZonesValidator.longueurMinimum(3), Validators.required]],
-        nom: ['',[Validators.required, Validators.maxLength(50)]],
-        probleme: ['',Validators.required],
+      prenom: ['', [ZonesValidator.longueurMinimum(3), Validators.required]],
+      nom: ['', [Validators.required, Validators.maxLength(50)]],
+      probleme: ['', Validators.required],
 
-        noTypeProbleme: ['', Validators.required],
-        courrielGroup: this.fb.group({
-        courriel: [{value: '', disabled: true}],
-        courrielConfirmation: [{value: '', disabled: true}],
-        }),
-        telephone: [{value: '', disabled: true}], 
+      noTypeProbleme: ['', Validators.required],
+      courrielGroup: this.fb.group({
+        courriel: [{ value: '', disabled: true }],
+        courrielConfirmation: [{ value: '', disabled: true }],
+      }),
+      notifications: ['Nepasmenotifier'],
+      telephone: [{ value: '', disabled: true }],
+      descriptionProbleme: ['', [Validators.required, Validators.minLength(5)]],
+      noUnite: '',
+      dateProbleme: {value: Date(), disabled: true}
 
     });
 
     this.typeProbleme.obtenirCategories()
-    .subscribe(cat => this.categoriesProbleme = cat,
-               error => this.errorMessage = <any>error);
+      .subscribe(cat => this.categoriesProbleme = cat,
+        error => this.errorMessage = <any>error);
+
+    this.problemeForm.get('notifications').valueChanges
+      .subscribe(value => this.appliquerNotifications(value));
+
   }
 
-    appliquerNotifications(TypeProbleme: string): void {
+  appliquerNotifications(TypeProbleme: string): void {
     const courriel = this.problemeForm.get('courrielGroup.courriel');
     const courrielConfirmation = this.problemeForm.get('courrielGroup.courrielConfirmation')
     const telephone = this.problemeForm.get('telephone');
@@ -54,33 +61,26 @@ export class ProblemeComponent implements OnInit {
     telephone.clearValidators();
     telephone.reset();
     telephone.disable();
-    
 
-      if(TypeProbleme === "ParTelephone"){
-        telephone.enable();
-        telephone.setValidators([Validators.required, Validators.pattern('[0-9]+'),Validators.minLength(10),Validators.maxLength(10)]);
-      }
 
-      if(TypeProbleme === "ParCourriel"){
-        courriel.setValidators([Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
+    if (TypeProbleme === "ParTelephone") {
+      telephone.enable();
+      telephone.setValidators([Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10), Validators.maxLength(10)]);
+    } else
+
+      if (TypeProbleme === "ParCourriel") {
+        
+        courriel.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
         courriel.enable();
-        courrielConfirmation.setValidators([Validators.required,Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
+        courrielConfirmation.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
         courrielConfirmation.enable();
-        courrielGroup.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])])
-      }else{
-        if(typeProbleme){
-          
-        }
+        courrielGroup.setValidators([Validators.compose([emailMatcherValidator.courrielConfirmation()])]);
+
       }
 
-
-
-      courriel.updateValueAndValidity();
-      courrielConfirmation.updateValueAndValidity();
-      telephone.updateValueAndValidity();
-
+    courriel.updateValueAndValidity();
+    courrielConfirmation.updateValueAndValidity();
+    courrielGroup.updateValueAndValidity();
+    telephone.updateValueAndValidity();
   }
-
-  
-
 }
