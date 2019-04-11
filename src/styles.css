@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-app-root div.card {
+inter-root div.card {
     animation-duration: .5s;
     animation-name: slideIn;
     animation-fill-mode: forwards;

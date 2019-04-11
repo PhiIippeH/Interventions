@@ -21,8 +21,6 @@ export class ProblemeComponent implements OnInit {
       prenom: ['', [ZonesValidator.longueurMinimum(3), Validators.required]],
       nom: ['', [Validators.required, Validators.maxLength(50)]],
       probleme: ['', Validators.required],
-
-      noTypeProbleme: ['', Validators.required],
       courrielGroup: this.fb.group({
         courriel: [{ value: '', disabled: true }],
         courrielConfirmation: [{ value: '', disabled: true }],
