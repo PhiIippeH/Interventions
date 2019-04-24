@@ -2,7 +2,7 @@
 <div class="container">
   <br />
   <div class="card">
-    <div class="card-header text-white bg-secondary">Déclarer un problème</div>
+    <div class="card-header text-white bg-secondary"><h5>Déclarer un problème</h5></div>
     <div class="card-body">
       <h5 class="card-title">Veuillez renseigner les zones suivantes et soumettre votre demande</h5>
       <div class="card-text">
@@ -87,22 +87,22 @@
 
           <div class="form-group row">
             <div class="col-md-2"></div>
-            <label for="typeProblemeId" class="col-md-10 col-form-label">Notifier-moi pour le statut de ma
+            <label for="NotificationId" class="col-md-10 col-form-label">Notifier-moi pour le statut de ma
               demande</label>
             <div class="col-md-2"></div>
             <div class="col-md-10">
               <label class="radio-inline">
-                <input type="radio" value="Nepasmenotifier" id="typeProblemeId" formControlName="notifications">&nbsp;Ne
+                <input type="radio" value="Nepasmenotifier" id="NotificationId" formControlName="notifications">&nbsp;Ne
                 pas me notifier
               </label>
               &nbsp;&nbsp;&nbsp;
               <label class="radio-inline">
-                <input type="radio" value="ParCourriel" id="typeProblemeId" formControlName="notifications">&nbsp;Par
+                <input type="radio" value="ParCourriel" id="NotificationId" formControlName="notifications">&nbsp;Par
                 courriel
               </label>
               &nbsp;&nbsp;&nbsp;
               <label class="radio-inline">
-                <input type="radio" value="ParTelephone" id="typeProblemeId" formControlName="notifications">&nbsp;Par
+                <input type="radio" value="ParTelephone" id="NotificationId" formControlName="notifications">&nbsp;Par
                 message texte
               </label>
             </div>
@@ -179,7 +179,7 @@
             <label for="courrielConfirmationId" class="col-md-2 col-form-label text-right">Confirmer courriel :</label>
             <!-- Indiquer le formGroupName pour avoir accès à formControlName -->
             <div class="col-md-10" formGroupName="courrielGroup">
-              <input class="form-control" id="courrielId" type="email"
+              <input class="form-control" id="courrielConfirmationId" type="email"
                 placeholder="Entrez à nouveau le courriel (obligatoire si notification par courriel)"
                 formControlName="courrielConfirmation"
                 [ngClass]="{'is-valid': (problemeForm.get('courrielGroup.courriel').touched ||
@@ -271,7 +271,7 @@
             </div>
           </div>
         </div>
-        
+
         </form>
       </div>
     </div>
