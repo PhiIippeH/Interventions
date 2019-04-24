@@ -19,6 +19,8 @@ export class AppPage {
     element(by.id('descriptionProblemeId')).sendKeys('Problème entre la chaise et le clavier...');
    }
    setChampsValidesScenarioAlternatifParMessageTexte() : void {
+    element(by.id('prenomId')).sendKeys('tonprenom');
+    element(by.id('nomId')).sendKeys('tonnom');
 
     // Sélectionner le X élément dans la zone de liste déroulante
     element(by.id('typeProblemeId')).all(by.tagName('option')).get(2).click();
